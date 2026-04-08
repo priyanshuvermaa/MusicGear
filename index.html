@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicGear - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-music"></i> MusicGear</div>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <div class="dropdown">
+                    <a href="shop.html" class="dropbtn"><i class="fas fa-list"></i> Categories</a>
+                    <div class="dropdown-content">
+                        <a href="shop.html?category=Microphones"><i class="fas fa-microphone"></i> Microphones</a>
+                        <a href="shop.html?category=MIDI%20Keyboards"><i class="fas fa-keyboard"></i> MIDI Keyboards</a>
+                        <a href="shop.html?category=Studio%20Headphones"><i class="fas fa-headphones"></i> Studio Headphones</a>
+                        <a href="shop.html?category=Studio%20Monitors"><i class="fas fa-volume-high"></i> Studio Monitors</a>
+                        <a href="shop.html?category=Audio%20Interfaces"><i class="fas fa-soundcloud"></i> Audio Interfaces</a>
+                        <a href="shop.html?category=Mixers"><i class="fas fa-sliders"></i> Mixers</a>
+                    </div>
+                </div>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a>
+                <div class="profile-dropdown">
+                    <div class="profile-icon"><i class="fas fa-user"></i></div>
+                    <div class="profile-menu"></div>
+                </div>
+            </nav>
+            <div class="hamburger">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Build Your Dream Music Studio</h1>
+            <p>Premium Music Instruments and Professional Studio Equipment</p>
+            <div class="hero-buttons">
+                <a href="shop.html" class="btn primary">Shop Now</a>
+                <a href="shop.html" class="btn secondary">Explore Categories</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="category-grid">
+                <a href="shop.html?category=Microphones" class="category-card" style="background-image:url('images/category-microphones.png')">
+                    <div class="overlay"></div>
+                    <span>Microphones</span>
+                </a>
+                <a href="shop.html?category=MIDI%20Keyboards" class="category-card" style="background-image:url('images/category-midi.png')">
+                    <div class="overlay"></div>
+                    <span>MIDI Keyboards</span>
+                </a>
+                <a href="shop.html?category=Studio%20Headphones" class="category-card" style="background-image:url('images/category-headphones.png')">
+                    <div class="overlay"></div>
+                    <span>Studio Headphones</span>
+                </a>
+                <a href="shop.html?category=Studio%20Monitors" class="category-card" style="background-image:url('images/category-monitors.png')">
+                    <div class="overlay"></div>
+                    <span>Studio Monitors</span>
+                </a>
+                <a href="shop.html?category=Audio%20Interfaces" class="category-card" style="background-image:url('images/category-interfaces.png')">
+                    <div class="overlay"></div>
+                    <span>Audio Interfaces</span>
+                </a>
+                <a href="shop.html?category=Mixers" class="category-card" style="background-image:url('images/category-mixers.png')">
+                    <div class="overlay"></div>
+                    <span>Mixers</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section (Home only) -->
+    <section class="featured-products">
+        <div class="container">
+            <h2>Featured Products</h2>
+            <div class="product-grid" id="home-products"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3><i class="fas fa-music"></i> MusicGear</h3>
+                <p>Your one-stop shop for premium music studio equipment. Trusted by professionals, built for creators.</p>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-list"></i> Categories</h4>
+                <a href="shop.html?category=Microphones"><i class="fas fa-microphone"></i> Microphones</a>
+                <a href="shop.html?category=MIDI%20Keyboards"><i class="fas fa-keyboard"></i> MIDI Keyboards</a>
+                <a href="shop.html?category=Studio%20Headphones"><i class="fas fa-headphones"></i> Studio Headphones</a>
+                <a href="shop.html?category=Studio%20Monitors"><i class="fas fa-volume-high"></i> Studio Monitors</a>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-phone"></i> Contact</h4>
+                <p><i class="fas fa-envelope"></i> Email: support@musicgear.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9876543210</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MusicGear. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicGear - Admin Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <!-- Admin Dashboard -->
+    <section class="admin-dashboard-section">
+        <div class="container">
+            <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+            <div class="admin-actions">
+                <button id="logout-admin" class="btn secondary"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            <div id="admin-orders"></div>
+        </div>
+    </section>
+
+    <script>
+        // Check if admin
+        const user = JSON.parse(localStorage.getItem('musicgear_current_user'));
+        if (!user || !user.isAdmin) {
+            window.location.href = 'admin-login.html';
+        }
+
+        document.getElementById('logout-admin').onclick = () => {
+            localStorage.removeItem('musicgear_current_user');
+            window.location.href = 'admin-login.html';
+        };
+
+        function renderAdminOrders() {
+            const container = document.getElementById('admin-orders');
+            const users = JSON.parse(localStorage.getItem('musicgear_users')) || [];
+            const allOrders = [];
+            users.forEach(u => {
+                if (u.orders) {
+                    u.orders.forEach(order => {
+                        allOrders.push({ ...order, customer: u });
+                    });
+                }
+            });
+            allOrders.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            if (allOrders.length === 0) {
+                container.innerHTML = '<p>No orders found.</p>';
+                return;
+            }
+
+            let html = '<table class="admin-orders-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Email</th><th>Products</th><th>Quantities</th><th>Total</th><th>Date</th><th>Address</th><th>Status</th><th>Actions</th></tr></thead><tbody>';
+            allOrders.forEach(order => {
+                const productsList = order.items.map(item => item.name).join(', ');
+                const quantitiesList = order.items.map(item => item.qty).join(', ');
+                const date = new Date(order.date).toLocaleString();
+                html += `
+                    <tr>
+                        <td>${order.id}</td>
+                        <td>${order.customer.name}</td>
+                        <td>${order.customer.email}</td>
+                        <td>${productsList}</td>
+                        <td>${quantitiesList}</td>
+                        <td>₹${order.total.toLocaleString('en-IN')}</td>
+                        <td>${date}</td>
+                        <td>${order.address || 'N/A'}</td>
+                        <td>
+                            <select onchange="updateOrderStatus('${order.customer.email}', '${order.id}', this.value)">
+                                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
+                                <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Processing</option>
+                                <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
+                                <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+                            </select>
+                        </td>
+                        <td><button onclick="viewOrderDetails('${order.customer.email}', '${order.id}')">View Details</button></td>
+                    </tr>
+                `;
+            });
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function updateOrderStatus(customerEmail, orderId, status) {
+            const users = JSON.parse(localStorage.getItem('musicgear_users')) || [];
+            const user = users.find(u => u.email === customerEmail);
+            if (user) {
+                const order = user.orders.find(o => o.id === orderId);
+                if (order) {
+                    order.status = status;
+                    localStorage.setItem('musicgear_users', JSON.stringify(users));
+                    alert('Order status updated');
+                }
+            }
+        }
+
+        function viewOrderDetails(customerEmail, orderId) {
+            const users = JSON.parse(localStorage.getItem('musicgear_users')) || [];
+            const user = users.find(u => u.email === customerEmail);
+            if (user) {
+                const order = user.orders.find(o => o.id === orderId);
+                if (order) {
+                    let details = `Order ID: ${order.id}\nCustomer: ${user.name} (${user.email})\nDate: ${new Date(order.date).toLocaleString()}\nAddress: ${order.address || 'N/A'}\nStatus: ${order.status}\n\nProducts:\n`;
+                    order.items.forEach(item => {
+                        details += `- ${item.name} x${item.qty} @ ₹${item.price.toLocaleString('en-IN')} each\n`;
+                    });
+                    details += `\nTotal: ₹${order.total.toLocaleString('en-IN')}`;
+                    alert(details);
+                }
+            }
+        }
+
+        renderAdminOrders();
+    </script>
+</body>
+</html>

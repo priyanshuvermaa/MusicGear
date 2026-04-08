@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicGear - Checkout</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <!-- Navbar (same as other pages) -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-music"></i> MusicGear</div>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <div class="dropdown">
+                    <a href="shop.html" class="dropbtn"><i class="fas fa-list"></i> Categories</a>
+                    <div class="dropdown-content">
+                        <a href="shop.html?category=Microphones"><i class="fas fa-microphone"></i> Microphones</a>
+                        <a href="shop.html?category=MIDI%20Keyboards"><i class="fas fa-keyboard"></i> MIDI Keyboards</a>
+                        <a href="shop.html?category=Studio%20Headphones"><i class="fas fa-headphones"></i> Studio Headphones</a>
+                        <a href="shop.html?category=Studio%20Monitors"><i class="fas fa-volume-high"></i> Studio Monitors</a>
+                        <a href="shop.html?category=Audio%20Interfaces"><i class="fas fa-soundcloud"></i> Audio Interfaces</a>
+                        <a href="shop.html?category=Mixers"><i class="fas fa-sliders"></i> Mixers</a>
+                    </div>
+                </div>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a>
+            </nav>
+            <div class="hamburger">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <h2>Checkout</h2>
+            <div class="checkout-layout">
+                <!-- left column: delivery details + payment -->
+                <div class="checkout-left">
+                    <div class="card delivery-card">
+                        <h3>Delivery Details</h3>
+                        <form id="delivery-form">
+                            <div class="form-group">
+                                <label for="full-name">Full Name</label>
+                                <input type="text" id="full-name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <textarea id="address" rows="2" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pincode">Pincode</label>
+                                <input type="text" id="pincode" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card payment-card">
+                        <h3>Payment Options</h3>
+                        <div class="payment-methods" id="payment-methods">
+                            <div class="method" data-method="upi"><i class="fas fa-mobile-alt"></i> UPI</div>
+                            <div class="method" data-method="card"><i class="fas fa-credit-card"></i> Debit / Credit Card</div>
+                            <div class="method" data-method="netbanking"><i class="fas fa-university"></i> Net Banking</div>
+                            <div class="method" data-method="cod"><i class="fas fa-truck"></i> Cash on Delivery (COD)</div>
+                        </div>
+                        <div id="payment-details" class="payment-details"></div>
+                    </div>
+                </div>
+                <!-- right column: order summary -->
+                <div class="checkout-right">
+                    <div class="card summary-card">
+                        <h3>Order Summary</h3>
+                        <div id="checkout-cart-items"></div>
+                        <div class="summary-total">
+                            Total: <span id="checkout-total">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- UPI Popup Modal (hidden by default) -->
+    <div id="upi-popup" class="modal upi-popup">
+        <div class="upi-content">
+            <button class="close-btn">&times;</button>
+            <h3>Pay with UPI</h3>
+            <div class="upi-apps">
+                <div class="upi-app"><i class="fab fa-google" title="Google Pay"></i> Google Pay</div>
+                <div class="upi-app"><i class="fas fa-mobile-alt" title="PhonePe"></i> PhonePe</div>
+                <div class="upi-app"><i class="fas fa-wallet" title="Paytm"></i> Paytm</div>
+                <div class="upi-app"><i class="fas fa-university" title="BHIM UPI"></i> BHIM UPI</div>
+            </div>
+            <div class="upi-qr"></div>
+            <div class="upi-input">
+                <label for="upi-id">Enter UPI ID</label>
+                <input type="text" id="upi-id" placeholder="example@upi">
+            </div>
+            <button id="upi-pay-now" class="btn primary">Pay Now</button>
+        </div>
+    </div>
+
+    <!-- Success Screen (hidden) -->
+    <div id="payment-success" class="payment-success hidden">
+        <div class="success-card">
+            <i class="fas fa-check-circle success-icon"></i>
+            <h2>Payment Successful</h2>
+            <p>Order ID: <span id="order-id"></span></p>
+            <div id="success-summary"></div>
+            <p>Your order has been placed successfully</p>
+            <a href="index.html" class="btn primary">Continue Shopping</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container footer-container">
+            <div class="footer-col">
+                <h3><i class="fas fa-music"></i> MusicGear</h3>
+                <p>Your one-stop shop for premium music studio equipment. Trusted by professionals, built for creators.</p>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-link"></i> Quick Links</h4>
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-list"></i> Categories</h4>
+                <a href="shop.html?category=Microphones"><i class="fas fa-microphone"></i> Microphones</a>
+                <a href="shop.html?category=MIDI%20Keyboards"><i class="fas fa-keyboard"></i> MIDI Keyboards</a>
+                <a href="shop.html?category=Studio%20Headphones"><i class="fas fa-headphones"></i> Studio Headphones</a>
+                <a href="shop.html?category=Studio%20Monitors"><i class="fas fa-volume-high"></i> Studio Monitors</a>
+            </div>
+            <div class="footer-col">
+                <h4><i class="fas fa-phone"></i> Contact</h4>
+                <p><i class="fas fa-envelope"></i> Email: support@musicgear.com</p>
+                <p><i class="fas fa-phone"></i> Phone: +91 9876543210</p>
+                <div class="social-icons">
+                    <a href="#" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MusicGear. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

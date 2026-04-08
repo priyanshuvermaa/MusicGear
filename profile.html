@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicGear - My Profile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <div class="logo"><i class="fas fa-music"></i> MusicGear</div>
+            <nav class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="shop.html"><i class="fas fa-store"></i> Shop</a>
+                <div class="dropdown">
+                    <a href="shop.html" class="dropbtn"><i class="fas fa-list"></i> Categories</a>
+                    <div class="dropdown-content">
+                        <a href="shop.html?category=Microphones"><i class="fas fa-microphone"></i> Microphones</a>
+                        <a href="shop.html?category=MIDI%20Keyboards"><i class="fas fa-keyboard"></i> MIDI Keyboards</a>
+                        <a href="shop.html?category=Studio%20Headphones"><i class="fas fa-headphones"></i> Studio Headphones</a>
+                        <a href="shop.html?category=Studio%20Monitors"><i class="fas fa-volume-high"></i> Studio Monitors</a>
+                        <a href="shop.html?category=Audio%20Interfaces"><i class="fas fa-soundcloud"></i> Audio Interfaces</a>
+                        <a href="shop.html?category=Mixers"><i class="fas fa-sliders"></i> Mixers</a>
+                    </div>
+                </div>
+                <a href="about.html"><i class="fas fa-circle-info"></i> About</a>
+                <a href="#contact"><i class="fas fa-envelope"></i> Contact</a>
+                <a href="cart.html" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart <span id="cart-count">0</span></a>
+                <div class="profile-dropdown">
+                    <div class="profile-icon"><i class="fas fa-user"></i></div>
+                    <div class="profile-menu"></div>
+                </div>
+            </nav>
+            <div class="hamburger">
+                <div></div><div></div><div></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Profile Section -->
+    <section class="profile-section">
+        <div class="container">
+            <h2><i class="fas fa-user"></i> My Profile</h2>
+            <div id="profile-info" class="profile-info"></div>
+            <div class="profile-actions">
+                <a href="liked.html" class="btn secondary"><i class="fas fa-heart"></i> View Liked Products</a>
+                <a href="orders.html" class="btn secondary"><i class="fas fa-shopping-bag"></i> View Orders</a>
+                <button id="logout-btn" class="btn primary"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 MusicGear. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
